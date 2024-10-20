@@ -42,7 +42,20 @@ header {
   font-size: 2rem;
   color: var(--text-color-light);
 }
-
+.btn {
+  background-color: #fff;
+  font-weight: 700;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  border: 0;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.btn {
+  background-color: var(--primary);
+  color: var(--text-color-light);
+}
 /* content */
 
 .content {
@@ -74,4 +87,16 @@ footer {
 
 .todo-container h1 {
   text-align: center;
+}
+.todo-form {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.todo-form input {
+  flex: 1;
+  margin-right: 0.5rem;
+  border: var(--border);
+  border-radius: 3px;
+  padding: 10px 15px;
 }

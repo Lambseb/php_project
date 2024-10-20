@@ -40,39 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<form action="" method="POST">
-    <div>
-        <label for="firstname">Prénom</label><br>
-        <input type="text" name="firstname" id="firstname" value=<?= "$firstname" ?>>
-        <?= $errors['firstname'] ? '<p style= "color:red">' . $errors['firstname'] . '</p>' : '' ?>
+<div class="content">
+    <div class="todo-container">
+        <h1>Ma Todo</h1>
+        <form action="/" method="POST" class="todo-form">
+            <input type="text">
+            <button class="btn btn-primary">Ajouter</button>
+        </form>
+        <div class="todo-list"></div>
     </div>
-    <div>
-        <label for="email">Email</label><br>
-        <input type="email" name="email" id="email" value=<?= "$email" ?>>
-        <?= $errors['email'] ? '<p style= "color:red">' . $errors['email'] . '</p>' : '' ?>
-    </div>
-    <div>
-        <label for="date">Date</label><br>
-        <input type="date" name="date" id="date">
-    </div>
-    <div>
-        <label for="cgu">CGU</label>
-        <input type="checkbox" name="cgu" id="cgu">
-    </div>
-    <div>
-        <label for="masculin">Homme</label>
-        <input type="radio" name="genre" id="masculin" value="masculin">
-        <label for="feminin">Femme</label>
-        <input type="radio" name="genre" id="feminin" value="feminin">
-    </div>
-    <div>
-        <label for="favoris">Favoris</label>
-        <select name="favoris" id="favoris">
-            <option value="wifi">Wifi</option>
-            <option value="tv">TV</option>
-            <option value="fibre">Fibre</option>
-        </select>
-    </div>
-
-    <button type="submit">Submit</button>
-</form>
+</div>
