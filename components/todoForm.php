@@ -1,41 +1,16 @@
 <?php
-
-const ERROR_REQUIRED = 'veillez renseigner ce champ';
-const ERROR_LENGTH = 'le champs doit faire entre 2 et 10 caractères';
-const ERROR_EMAIL = "l'email n'est pas valide";
-
-$errors = [
-    'firstname' => '',
-    'email' => ''
-];
-$firstname = '';
-$email = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_POST = filter_input_array(INPUT_POST, [
-        'firstname' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-        'email' => FILTER_SANITIZE_EMAIL,
-        'date' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-        'genre' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-        'cgu' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-        'favoris' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-    ]);
-
-    $firstname = $_POST['firstname'] ?? "";
-    $email = $_POST['email'] ?? "";
-
-    if (!$firstname) {
-        $errors['firstname'] = ERROR_REQUIRED;
-    } elseif (mb_strlen($firstname) < 2 || mb_strlen($firstname) > 10) {
-        $errors['firstname'] = ERROR_LENGTH;
-    }
-
-    if (!$email) {
-        $errors['email'] = ERROR_REQUIRED;
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error['email'] = ERROR_EMAIL;
+const ERROR_REQUIRED = "veuillez renseigner une todo";
+const ERROR_TOO_SHORT = "Veuillez entrer au moins 5 caractères";
+$error = "";
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $todo = $_POST['todo'] ?? '';
+    if (!$todo) {
+        $error = ERROR_REQUIRED;
+    } else if (mb_strlen($todo) < 5) {
+        $error = ERROR_TOO_SHORT;
     };
-}
+};
 
 
 ?>
@@ -44,9 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="todo-container">
         <h1>Ma Todo</h1>
         <form action="/" method="POST" class="todo-form">
-            <input type="text">
+            <input type="text" name=todo>
             <button class="btn btn-primary">Ajouter</button>
         </form>
+        <?php if ($error): ?>
+            <p class="text-error"><?= $error ?></p>
+        <?php endif; ?>
         <div class="todo-list"></div>
     </div>
 </div>

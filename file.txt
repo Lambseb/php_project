@@ -1,1 +1,36 @@
-Ayourt
+const ERROR_REQUIRED = 'veillez renseigner ce champ';
+const ERROR_LENGTH = 'le champs doit faire entre 2 et 10 caractères';
+const ERROR_EMAIL = "l'email n'est pas valide";
+
+$errors = [
+    'firstname' => '',
+    'email' => ''
+];
+$firstname = '';
+$email = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_POST = filter_input_array(INPUT_POST, [
+        'firstname' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'email' => FILTER_SANITIZE_EMAIL,
+        'date' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'genre' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'cgu' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+        'favoris' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+    ]);
+
+    $firstname = $_POST['firstname'] ?? "";
+    $email = $_POST['email'] ?? "";
+
+    if (!$firstname) {
+        $errors['firstname'] = ERROR_REQUIRED;
+    } elseif (mb_strlen($firstname) < 2 || mb_strlen($firstname) > 10) {
+        $errors['firstname'] = ERROR_LENGTH;
+    }
+
+    if (!$email) {
+        $errors['email'] = ERROR_REQUIRED;
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error['email'] = ERROR_EMAIL;
+    };
+}

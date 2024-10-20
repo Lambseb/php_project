@@ -100,3 +100,6 @@ footer {
   border-radius: 3px;
   padding: 10px 15px;
 }
+.text-error {
+  color: red;
+}
