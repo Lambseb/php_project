@@ -56,6 +56,7 @@ header {
 .btn {
   background-color: var(--primary);
   color: var(--text-color-light);
+  margin-left: 0.5rem;
 }
 /* content */
 
@@ -66,7 +67,10 @@ header {
   justify-content: center;
   align-items: center;
 }
-
+ul {
+  padding: 0;
+  list-style-type: none;
+}
 /* footer */
 footer {
   display: flex;
@@ -103,5 +107,24 @@ footer {
 }
 .text-error {
   color: var(--redError);
+  font-size: 12px;
+}
+.todo-item {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 0 0.3rem;
+}
+.todo-item:nth-child(odd) {
+  background: var(--background-light);
+}
+.todo-name {
+  flex: 1;
+  margin-right: 0.5rem;
+}
+.btn-delete {
+  color: red;
+  background: antiquewhite;
   font-size: 12px;
 }

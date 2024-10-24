@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         $todos = [...$todos, [
             "name" => $todo,
             "done" => false,
-            "id" => time()
+            "id" => time(),
         ]];
         file_put_contents($filename, json_encode($todos));
     }
@@ -37,12 +37,23 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     <div class="todo-container">
         <h1>Ma Todo</h1>
         <form action="/" method="POST" class="todo-form">
-            <input type="text" name=todo>
+            <input type="text" value="<? $todo ?>" name=todo>
             <button class="btn btn-primary">Ajouter</button>
         </form>
         <?php if ($error): ?>
             <p class="text-error"><?= $error ?></p>
         <?php endif; ?>
-        <div class="todo-list"></div>
+        <ul class="todo-list">
+            <?php foreach ($todos as $to): ?>
+                <li class="todo-item">
+                    <span class="todo-name"><?= $to["name"]; ?></span>
+                    <a href="../edit-todo.php?=<? $t['id'] ?>">
+                        <button class="btn btn-primary">Valider</button>
+                    </a>
+                    <button class="btn btn-delete">Supprimer</button>
+
+                </li>
+            <?php endforeach ?>
+        </ul>
     </div>
 </div>
