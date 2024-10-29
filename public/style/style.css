@@ -128,3 +128,6 @@ footer {
   background: antiquewhite;
   font-size: 12px;
 }
+.low-opacity {
+  opacity: 0.5;
+}

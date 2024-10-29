@@ -45,10 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
         <?php endif; ?>
         <ul class="todo-list">
             <?php foreach ($todos as $to): ?>
-                <li class="todo-item">
-                    <span class="todo-name"><?= $to["name"]; ?></span>
-                    <a href="../edit-todo.php?=<? $t['id'] ?>">
-                        <button class="btn btn-primary">Valider</button>
+                <li class="todo-item <?= $to['done'] ? 'low-opacity' : '' ?>">
+                    <span class="todo-name"><?= $to["name"] ?></span>
+                    <a href="../edit-todo.php?id=<?= $to["id"] ?>">
+                        <button class="btn btn-primary"><?= $to['done'] ? 'Annuler' : 'Valider' ?></button>
                     </a>
                     <button class="btn btn-delete">Supprimer</button>
 
