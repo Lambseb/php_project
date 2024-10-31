@@ -6,6 +6,7 @@ $removePathComponent = str_replace("\\components", '', $directoryFile);
 $filename = $removePathComponent . "/data/todos.json";
 echo $removePathComponent;
 $error = "";
+$todo = '';
 $todos = [];
 
 if (file_exists($filename)) {
@@ -27,31 +28,30 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
             "id" => time(),
         ]];
         file_put_contents($filename, json_encode($todos));
+        header('location: /');
     }
 };
-
-
 ?>
-
 <div class="content">
     <div class="todo-container">
         <h1>Ma Todo</h1>
         <form action="/" method="POST" class="todo-form">
-            <input type="text" value="<? $todo ?>" name=todo>
+            <input value="<?= $todo ?>" name="todo" type="text">
             <button class="btn btn-primary">Ajouter</button>
         </form>
         <?php if ($error): ?>
             <p class="text-error"><?= $error ?></p>
-        <?php endif; ?>
+        <?php endif ?>
         <ul class="todo-list">
             <?php foreach ($todos as $to): ?>
-                <li class="todo-item <?= $to['done'] ? 'low-opacity' : '' ?>">
+                <li class="todo-item ">
                     <span class="todo-name"><?= $to["name"] ?></span>
-                    <a href="../edit-todo.php?id=<?= $to["id"] ?>">
+                    <a class="<?= $to['done'] ? 'low-opacity' : '' ?>" href="../edit-todo.php?id=<?= $to["id"] ?>">
                         <button class="btn btn-primary"><?= $to['done'] ? 'Annuler' : 'Valider' ?></button>
                     </a>
-                    <button class="btn btn-delete">Supprimer</button>
-
+                    <a href="../remove-todo.php?id=<?= $to['id'] ?>">
+                        <button class="btn btn-delete">Supprimer</button>
+                    </a>
                 </li>
             <?php endforeach ?>
         </ul>

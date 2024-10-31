@@ -14,4 +14,4 @@ if ($id) {
 }
 
 
-header('location: http://localhost:8000');
+header('location: /');
